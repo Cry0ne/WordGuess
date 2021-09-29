@@ -1,0 +1,22 @@
+﻿body {
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.boxEnterWord {
+    display: flex;
+    flex-direction: column;
+}
+
+.MessageFromUser{
+    display:flex;
+
+}
+
+.MessageFromSystem {
+    display: flex;
+}

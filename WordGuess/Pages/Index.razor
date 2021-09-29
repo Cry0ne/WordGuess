@@ -1,7 +1,37 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<div class="boxEnterWord">
+    <h3>Введите Вашу догадку:</h3>
+    <input type="text" @bind="@userWord" />
+    <button class="btn-success" @onclick="CheckCurrentWord">Отправить</button>
+</div>
+<MessageList messages="messages"/>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code{
+    private string userWord;
+    List<Message> messages = new List<Message>();
+    SystemGuess system = new SystemGuess();
+    Message message;
+    string systemWord = "Кукис";
+
+
+    private void CheckCurrentWord()
+    {
+        message = new Message();
+        message.Add("Вы", $"{userWord}");
+        messages.Add(message);
+        if (Convert.ToBoolean(String.Compare(userWord, systemWord)))
+        {
+            message = new Message();
+            message.Add("Система", "Угадал");
+        }
+        else
+        {
+            message = new Message();
+            message.Add("Система", "Не угадал");
+        }
+        messages.Add(message);
+
+    }
+}

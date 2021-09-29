@@ -1,0 +1,24 @@
+﻿<div class="MessageList">
+    @if (messages.Count >= 1) {
+        @foreach (Message message in messages)
+        {
+            @if (message.Poster == "Вы")
+             {
+                <div class="MessageFromUser">
+                    <p>@message.Poster @message.TextMessage</p>
+                </div>
+             }
+             else
+             {    
+                <div class="MessageFromSystem">
+                    <p>@message.Poster @message.TextMessage</p>
+                </div>
+             }
+            
+        }
+    }
+</div>
+
+@code {
+    [Parameter] public List<Message> messages { get; set; }
+}
