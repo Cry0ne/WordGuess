@@ -20,5 +20,16 @@
         <component type="typeof(App)" render-mode="ServerPrerendered" />
     </app>
     <script src="_framework/blazor.server.js"></script>
+    <script>
+        function scrollMessageList() {
+            setTimeout(() => {
+                var messageList = document.getElementById('MessageList');
+                messageList.scrollTo(0, messageList.scrollHeight);              
+            }, 200);          
+        }
+
+        
+        
+    </script>
 </body>
 </html>

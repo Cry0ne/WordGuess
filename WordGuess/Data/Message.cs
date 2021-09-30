@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace WordGuess.Data
 {
@@ -13,6 +13,10 @@ namespace WordGuess.Data
             {
                 return posterMessage;
             }
+            set
+            {
+                posterMessage = !String.IsNullOrEmpty(value) ? value : "Система";
+            }
         }
         public string TextMessage
         {
@@ -20,12 +24,10 @@ namespace WordGuess.Data
             {
                 return textMessage;
             }
+            set
+            {
+                textMessage = !String.IsNullOrEmpty(value) ? value : "Введите слово";
+            }
         }
-
-        public void Add(string poster, string text)
-        {
-            posterMessage = poster;
-            textMessage = text;
-        }     
     }
 }

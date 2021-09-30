@@ -1,37 +1,28 @@
 ﻿@page "/"
-
+@inject IJSRuntime JS
+<MessageList messages="messages" />
 <div class="boxEnterWord">
     <h3>Введите Вашу догадку:</h3>
-    <input type="text" @bind="@userWord" />
+    <input type="text" @bind="@UserWord" />
     <button class="btn-success" @onclick="CheckCurrentWord">Отправить</button>
 </div>
-<MessageList messages="messages"/>
-
 
 @code{
-    private string userWord;
+    private string userWord = "";
+    public string UserWord { get { return userWord; } set { userWord = String.IsNullOrEmpty(value) ? "Введите слово" : value.Replace(" ",""); } }
+
     List<Message> messages = new List<Message>();
-    SystemGuess system = new SystemGuess();
-    Message message;
-    string systemWord = "Кукис";
+    SystemGuess systemGuess = new SystemGuess();
 
-
-    private void CheckCurrentWord()
+    private async void CheckCurrentWord()
     {
-        message = new Message();
-        message.Add("Вы", $"{userWord}");
-        messages.Add(message);
-        if (Convert.ToBoolean(String.Compare(userWord, systemWord)))
-        {
-            message = new Message();
-            message.Add("Система", "Угадал");
-        }
-        else
-        {
-            message = new Message();
-            message.Add("Система", "Не угадал");
-        }
-        messages.Add(message);
+        messages.Add(new Message { Poster = "Вы", TextMessage = UserWord });
 
+        if (!String.IsNullOrEmpty(UserWord))
+        {
+            messages.Add(new Message { Poster = "Система", TextMessage = systemGuess.Check(UserWord) });
+        }
+        await JS.InvokeVoidAsync("scrollMessageList");
     }
+
 }

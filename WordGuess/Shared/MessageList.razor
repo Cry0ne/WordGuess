@@ -1,20 +1,19 @@
-﻿<div class="MessageList">
+﻿<div class="MessageList" id="MessageList">
     @if (messages.Count >= 1) {
         @foreach (Message message in messages)
         {
             @if (message.Poster == "Вы")
              {
-                <div class="MessageFromUser">
-                    <p>@message.Poster @message.TextMessage</p>
+                <div class="MessageRight">
+                    <div class="MessageFromUser">@message.TextMessage</div>
                 </div>
              }
              else
              {    
-                <div class="MessageFromSystem">
-                    <p>@message.Poster @message.TextMessage</p>
+                <div class="MessageLeft">
+                    <div class="MessageFromSystem">@message.TextMessage</div>
                 </div>
-             }
-            
+             }            
         }
     }
 </div>
